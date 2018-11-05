@@ -1,4 +1,4 @@
 .header on
 .mode csv
 
-SELECT item_name_a, AVG(item_total_diff), temp_diff FROM item_summary_diffs WHERE temp_diff = 2 GROUP BY item_name_a;
+SELECT p.item_name_a AS item_name, n.avg_diff AS colder, p.avg_diff AS warmer FROM item_change_pos_2f p JOIN item_change_neg_2f n ON p.item_name_a = n.item_name_a;

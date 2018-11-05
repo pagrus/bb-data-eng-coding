@@ -79,7 +79,7 @@ temp_deltas_view = """
 CREATE VIEW temp_deltas
 AS SELECT ta.id, ta.stamp AS stamp_a, tb.stamp AS stamp_b, (ta.temp_int - tb.temp_int) as diff 
 FROM temps_breakout_daily ta 
-JOIN temps_breakout_daily tb on ta.id = (tb.id + 1);
+JOIN temps_breakout_daily tb on ta.id = (tb.id - 1);
 """
 
 item_summary_diffs_view = """
@@ -87,10 +87,26 @@ CREATE VIEW item_summary_diffs
 AS SELECT id, stamp_a, stamp_b, diff AS temp_diff, 
 dsa.item_name AS item_name_a, dsa.daily_total AS daily_total_a, dsa.transaction_date AS transaction_date_a,  
 dsb.item_name AS item_name_b, dsb.daily_total AS daily_total_b, dsb.transaction_date AS transaction_date_b,
-(dsa.daily_total - dsb.daily_total) AS item_total_diff  
+(dsb.daily_total - dsa.daily_total) AS item_total_diff  
 FROM temp_deltas td 
 JOIN item_daily_summary dsa ON td.stamp_a = dsa.transaction_date
 JOIN item_daily_summary dsb ON td.stamp_b = dsb.transaction_date AND dsa.item_name = dsb.item_name;
+"""
+
+item_change_pos_2f = """
+CREATE VIEW item_change_pos_2f
+AS SELECT item_name_a, AVG(item_total_diff) AS avg_diff
+FROM item_summary_diffs 
+WHERE temp_diff = 2  
+GROUP BY item_name_a;
+"""
+
+item_change_neg_2f = """
+CREATE VIEW item_change_neg_2f
+AS SELECT item_name_a, AVG(item_total_diff) AS avg_diff 
+FROM item_summary_diffs 
+WHERE temp_diff = -2  
+GROUP BY item_name_a;
 """
 
 ##############################################################
@@ -115,6 +131,8 @@ cur.execute(temps_view_daily)
 cur.execute(sales_with_temps_view)
 cur.execute(temp_deltas_view)
 cur.execute(item_summary_diffs_view)
+cur.execute(item_change_pos_2f)
+cur.execute(item_change_neg_2f)
 
 ##############################################################
 

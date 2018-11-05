@@ -77,7 +77,7 @@ ON sd.transaction_date_hour = tb.temp_date_hour;
 
 temp_deltas_view = """
 CREATE VIEW temp_deltas
-AS SELECT ta.id, ta.stamp AS stamp_a, ta.temp_int AS temp_a, tb.stamp AS stamp_b, tb.temp_int AS temp_b, (ta.temp_int - tb.temp_int) as diff 
+AS SELECT ta.id, ta.stamp AS stamp_a, ta.temp_int AS temp_a, tb.stamp AS stamp_b, tb.temp_int AS temp_b, (tb.temp_int - ta.temp_int) as diff 
 FROM temps_breakout_daily ta 
 JOIN temps_breakout_daily tb on ta.id = (tb.id - 1);
 """

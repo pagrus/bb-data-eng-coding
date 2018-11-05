@@ -62,7 +62,8 @@ Mainly a faster beefier database like PostgreSQL, and depending on the use case(
 ## Some schemas and example data
 
 The joined transactions and items tables
-```sqlite> SELECT stamp, item_name, item_id, quantity, transaction_date_hour FROM sales_detail ORDER BY RANDOM() LIMIT 10;
+```
+sqlite> SELECT stamp, item_name, item_id, quantity, transaction_date_hour FROM sales_detail ORDER BY RANDOM() LIMIT 10;
 stamp                item_name         item_id     quantity    transaction_date_hour
 -------------------  ----------------  ----------  ----------  ---------------------
 2016-08-08 10:04:37  Au Lait, Unknown  16          2           2016-08-08-10        
@@ -78,7 +79,8 @@ stamp                item_name         item_id     quantity    transaction_date_
 ```
 
 Every sale with the temp at the time
-```sqlite> SELECT * FROM sales_with_temps ORDER BY RANDOM() LIMIT 10;
+```
+sqlite> SELECT * FROM sales_with_temps ORDER BY RANDOM() LIMIT 10;
 item_name        quantity    stamp                temp_int  
 ---------------  ----------  -------------------  ----------
 Sparkling Water  1           2016-02-14 15:11:28  70        
@@ -94,7 +96,8 @@ Drip Coffee      1           2016-04-24 14:01:38  65
 ``` 
 
 Pairs of dates with differences in temp
-```sqlite> SELECT * FROM temp_deltas ORDER BY RANDOM() LIMIT 10;
+```
+sqlite> SELECT * FROM temp_deltas ORDER BY RANDOM() LIMIT 10;
 id          stamp_a     temp_a      stamp_b     temp_b      diff      
 ----------  ----------  ----------  ----------  ----------  ----------
 98          2016-04-07  63          2016-04-08  62          -1        

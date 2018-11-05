@@ -15,7 +15,7 @@
 
 - README.md - This document
 - bb_data_eng_challenge.py - code to create database, define tables, import data
-- data/morse.csv - data provided with instructions - ignored by .gitignore as per request
+- data/morse.csv - data provided with instructions - ignored by .gitignore per request
 - data/1524261.csv - weather data provided by ncdc.noaa.gov
 - data/KCAOAKLA11_2016-01-01_2016-12-31.json - daily summary of temp data provided by Weather Underground
 - query1.sql - SQL file containing my solution to part 1
@@ -53,7 +53,7 @@ I would first try to establish what incoming weather data would look like in a p
 
 ### What are some tradeoffs and assumptions for your design of this ETL?
 
-The big assumption I'm making is that these queries would be run once per day and could be cached somewhere for use in dashboards, reports, daily summaries and so forth. If they were more likely to be executed many times per hour (or minute, or second) then that would change my approach pretty dramatically. I also am assuming that the weather at the airport tracks the weather in Temescal pretty closely, or that whatever difference there is would be consistent.
+The big assumption I'm making is that these queries would be run once per day and could be cached somewhere for use in dashboards, reports, daily summaries and so forth. If they were more likely to be executed many times per hour (or minute, or second) then that would change my approach pretty dramatically. I also am assuming that the weather at the airport tracks the weather in Temescal pretty closely, or that whatever difference there is would be consistent. One tradeoff is the use of SQLite-- while it can be used for demonstration and proof of concept type stuff I am a little uncomfortable with its fast and loose data types. On a stylistic note I sacrifice some efficiency and speed for readability and simplicity, that I attempt to do this probably surprises no one. I am also assuming that the data provided is a good random sample and eg the negative values would be something I could expect in a production dataset. 
 
 ### What some of the tools you would consider to build this into an ETL pipeline?
 

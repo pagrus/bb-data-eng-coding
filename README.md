@@ -58,3 +58,35 @@ The big assumption I'm making is that these queries would be run once per day an
 ### What some of the tools you would consider to build this into an ETL pipeline?
 
 Mainly a faster beefier database like PostgreSQL, and depending on the use case(s) maybe cron or other scheduler. Something to refresh data, probably curl or the python requests module unless something more specific is required to interact with either the sales or weather APIs. Maybe something to summarize and/or archive old data, although that's probably technically ouside the scope of this tool. 
+
+## Some schemas and example data
+
+The joined transactions and items tables:
+```sqlite> SELECT stamp, item_name, item_id, quantity, transaction_date_hour FROM sales_detail ORDER BY RANDOM() LIMIT 10;
+stamp                item_name         item_id     quantity    transaction_date_hour
+-------------------  ----------------  ----------  ----------  ---------------------
+2016-08-08 10:04:37  Au Lait, Unknown  16          2           2016-08-08-10        
+2016-02-06 09:34:08  Espresso          12          1           2016-02-06-09        
+2016-06-29 14:18:37  NOLA Carton       8           1           2016-06-29-14        
+2016-08-21 16:53:35  Cascara Fizz      14          1           2016-08-21-16        
+2016-08-10 09:01:12  Drip Coffee       6           1           2016-08-10-09        
+2016-02-09 12:14:45  Latte             1           1           2016-02-09-12        
+2016-12-09 11:02:36  Macchiato         20          1           2016-12-09-11        
+2016-05-16 15:12:47  Latte             1           1           2016-05-16-15        
+2016-11-28 09:19:25  Drip Coffee       6           2           2016-11-28-09        
+2016-03-01 13:55:46  Drip Coffee       6           1           2016-03-01-13 ```
+
+Every sale with the temp at the time
+```sqlite> SELECT * FROM sales_with_temps ORDER BY RANDOM() LIMIT 10;
+item_name        quantity    stamp                temp_int  
+---------------  ----------  -------------------  ----------
+Sparkling Water  1           2016-02-14 15:11:28  70        
+Latte            1           2016-09-19 10:01:14  80        
+S.O. Iced - 4 o  1           2016-07-23 10:30:02  74        
+Latte            1           2016-04-09 07:26:05  58        
+Americano        1           2016-11-22 11:11:22  58        
+Drip Coffee      1           2016-07-16 07:14:14  62        
+Drip Coffee      1           2016-08-06 12:37:28  64        
+Cappuccino, Unk  2           2016-09-09 09:26:46  63        
+Drip Coffee      2           2016-03-28 17:14:45  59        
+Drip Coffee      1           2016-04-24 14:01:38  65 ``` 

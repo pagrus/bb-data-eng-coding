@@ -112,7 +112,7 @@ id          stamp_a     temp_a      stamp_b     temp_b      diff
 354         2016-12-19  45          2016-12-20  48          3 
 ```
 
-Every time there were consecutive dates which differed by three degrees, and the number of Espressos sold on those days *Oh, there's one (or more) of those negative values in the daily total.*
+Every time there were consecutive dates which differed by (plus) three degrees, and the number of Espressos sold on those days *Oh, there's one (or more) of those negative values in the daily total.*
 ```
 sqlite> SELECT stamp_a, stamp_b, temp_diff, item_name_a, daily_total_a, daily_total_b, item_total_diff
    ...> FROM item_summary_diffs

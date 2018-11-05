@@ -111,3 +111,20 @@ id          stamp_a     temp_a      stamp_b     temp_b      diff
 19          2016-01-19  56          2016-01-20  53          -3        
 354         2016-12-19  45          2016-12-20  48          3 
 ```
+
+Every time there were consecutive dates which differed by three degrees, and the number of Espressos sold on those days
+```
+sqlite> SELECT stamp_a, stamp_b, temp_diff, item_name_a, daily_total_a, daily_total_b, item_total_diff
+   ...> FROM item_summary_diffs
+   ...> WHERE item_name_a = "Espresso" AND temp_diff = 3;
+stamp_a     stamp_b     temp_diff   item_name_a  daily_total_a  daily_total_b  item_total_diff
+----------  ----------  ----------  -----------  -------------  -------------  ---------------
+2016-02-05  2016-02-06  3           Espresso     -1             3              4              
+2016-02-06  2016-02-07  3           Espresso     3              4              1              
+2016-05-07  2016-05-08  3           Espresso     2              2              0              
+2016-06-22  2016-06-23  3           Espresso     1              4              3              
+2016-10-03  2016-10-04  3           Espresso     1              1              0              
+2016-12-12  2016-12-13  3           Espresso     2              3              1              
+2016-12-19  2016-12-20  3           Espresso     1              1              0              
+2016-12-28  2016-12-29  3           Espresso     2              1              -1 
+```

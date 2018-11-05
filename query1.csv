@@ -1,0 +1,56 @@
+item_name,SUM(quantity),temp_int
+Latte,9,36
+"Cappuccino, Unknown",8,38
+Latte,1,39
+Latte,5,40
+"Cappuccino, Unknown",9,42
+"Drip Coffee",15,43
+"S.O. Iced Coffee",15,44
+"Drip Coffee",7,45
+Latte,20,46
+"Cappuccino, Unknown",20,47
+"Drip Coffee",54,48
+Latte,48,49
+"Drip Coffee",101,50
+"Cappuccino, Unknown",120,51
+"New Orleans Iced Coffee (cup)",136,52
+"Cascara Fizz",182,53
+"New Orleans Iced Coffee (cup)",220,54
+Mocha,266,55
+"New Orleans Iced Coffee (cup)",242,56
+"NOLA Carton",316,57
+"Cappuccino, Unknown",471,58
+"Cappuccino, Unknown",742,59
+Latte,639,60
+"S.O. Iced - 4 oz Oji",943,61
+Espresso,873,62
+"Cappuccino, Unknown",980,63
+"Au Lait, Unknown",869,64
+"S.O. Iced Coffee",959,65
+Mocha,732,66
+Mocha,820,67
+"Cappuccino, Unknown",584,68
+Mocha,519,69
+Espresso,380,70
+"New Orleans Iced Coffee (cup)",395,71
+"Drip Coffee",243,72
+Americano,167,73
+"New Orleans Iced Coffee (cup)",164,74
+"New Orleans Iced Coffee (cup)",99,75
+"New Orleans Iced Coffee (cup)",74,76
+"S.O. Iced Coffee",63,77
+"Drip Coffee",47,78
+Espresso,89,79
+"New Orleans Iced Coffee (cup)",70,80
+"Chemex Coffee",32,81
+"New Orleans Iced Coffee (cup)",18,82
+"S.O. Iced Coffee",20,83
+"S.O. Iced Coffee",15,84
+"S.O. Iced - 4 oz Oji",19,85
+"New Orleans Iced Coffee (cup)",10,86
+Espresso,14,87
+Latte,1,88
+"Drip Coffee",9,89
+"New Orleans Iced Coffee (cup)",5,90
+"Apple Juice",2,94
+"NOLA Carton",3,95

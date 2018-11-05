@@ -59,7 +59,7 @@ The big assumption I'm making is that these queries would be run once per day an
 
 Mainly a faster beefier database like PostgreSQL, and depending on the use case(s) maybe cron or other scheduler. Something to refresh data, probably curl or the python requests module unless something more specific is required to interact with either the sales or weather APIs. Maybe something to summarize and/or archive old data, although that's probably technically ouside the scope of this tool. 
 
-## Some schemas and example data
+## Some example data
 
 The joined transactions and items tables
 ```
@@ -112,7 +112,7 @@ id          stamp_a     temp_a      stamp_b     temp_b      diff
 354         2016-12-19  45          2016-12-20  48          3 
 ```
 
-Every time there were consecutive dates which differed by three degrees, and the number of Espressos sold on those days
+Every time there were consecutive dates which differed by three degrees, and the number of Espressos sold on those days *Oh, there's one (or more) of those negative values in the daily total.*
 ```
 sqlite> SELECT stamp_a, stamp_b, temp_diff, item_name_a, daily_total_a, daily_total_b, item_total_diff
    ...> FROM item_summary_diffs

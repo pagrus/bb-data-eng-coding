@@ -61,7 +61,7 @@ Mainly a faster beefier database like PostgreSQL, and depending on the use case(
 
 ## Some schemas and example data
 
-The joined transactions and items tables:
+The joined transactions and items tables
 ```sqlite> SELECT stamp, item_name, item_id, quantity, transaction_date_hour FROM sales_detail ORDER BY RANDOM() LIMIT 10;
 stamp                item_name         item_id     quantity    transaction_date_hour
 -------------------  ----------------  ----------  ----------  ---------------------
@@ -92,3 +92,19 @@ Cappuccino, Unk  2           2016-09-09 09:26:46  63
 Drip Coffee      2           2016-03-28 17:14:45  59        
 Drip Coffee      1           2016-04-24 14:01:38  65 
 ``` 
+
+Pairs of dates with differences in temp
+```sqlite> SELECT * FROM temp_deltas ORDER BY RANDOM() LIMIT 10;
+id          stamp_a     temp_a      stamp_b     temp_b      diff      
+----------  ----------  ----------  ----------  ----------  ----------
+98          2016-04-07  63          2016-04-08  62          -1        
+34          2016-02-03  49          2016-02-04  53          4         
+56          2016-02-25  61          2016-02-26  59          -2        
+192         2016-07-10  66          2016-07-11  68          2         
+253         2016-09-09  62          2016-09-10  62          0         
+129         2016-05-08  60          2016-05-09  60          0         
+166         2016-06-14  61          2016-06-15  58          -3        
+193         2016-07-11  68          2016-07-12  67          -1        
+19          2016-01-19  56          2016-01-20  53          -3        
+354         2016-12-19  45          2016-12-20  48          3 
+```

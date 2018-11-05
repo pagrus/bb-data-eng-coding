@@ -14,10 +14,12 @@
 ## Files
 
 - README.md - This document
-- bb_data_eng_challenge_db_init.py - code to create database, define tables, import data
-- bb_data_eng_challenge.py - code to run queries and output CSV files
+- bb_data_eng_challenge.py - code to create database, define tables, import data
 - data/morse.csv - data provided with instructions - ignored by .gitignore as per request
 - data/1524261.csv - weather data provided by ncdc.noaa.gov
+- data/KCAOAKLA11_2016-01-01_2016-12-31.json - daily summary of temp data provided by Weather Underground
+- query1.sql - SQL file containing my solution to part 1
+- query2.sql - SQL file containing my solution to part 2
 - query1.csv - results of query 1
 - query2.csv - results of query 2
 

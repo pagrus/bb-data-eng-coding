@@ -49,7 +49,7 @@ This solution requires python 3 and the pandas, numpy, sqlite3, json, and dateti
 
 ### How would productize both reports? Please consider the following in your answer: Data modeling, Data partioning, Data backfill
 
-I would first try to establish what incoming weather data would look like in a production setting, and maybe even recommend a more DIY type solution with an IOT device or SBC onsite rather than relying on a service to provide temp logs. 
+I would first try to establish what incoming weather data would look like in a production setting, and maybe even recommend a more DIY type solution with an IOT device or SBC onsite rather than relying on a service to provide temp logs. I would probably also think about notifications for when it completes sucessfully, chokes on errors, or encounters weird data. I am coming back to RSS for this kind of thing and while that's not really a tool it could inform whatever actual tools are used.
 
 ### What are some tradeoffs and assumptions for your design of this ETL?
 
@@ -57,4 +57,4 @@ The big assumption I'm making is that these queries would be run once per day an
 
 ### What some of the tools you would consider to build this into an ETL pipeline?
 
-Mainly a faster beefier database like PostgreSQL, depending on the use case(s) maybe cron or other scheduler. 
+Mainly a faster beefier database like PostgreSQL, and depending on the use case(s) maybe cron or other scheduler. Something to refresh data, probably curl or the python requests module unless something more specific is required to interact with either the sales or weather APIs. Maybe something to summarize and/or archive old data, although that's probably technically ouside the scope of this tool. 

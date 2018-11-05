@@ -74,7 +74,8 @@ stamp                item_name         item_id     quantity    transaction_date_
 2016-12-09 11:02:36  Macchiato         20          1           2016-12-09-11        
 2016-05-16 15:12:47  Latte             1           1           2016-05-16-15        
 2016-11-28 09:19:25  Drip Coffee       6           2           2016-11-28-09        
-2016-03-01 13:55:46  Drip Coffee       6           1           2016-03-01-13 ```
+2016-03-01 13:55:46  Drip Coffee       6           1           2016-03-01-13 
+```
 
 Every sale with the temp at the time
 ```sqlite> SELECT * FROM sales_with_temps ORDER BY RANDOM() LIMIT 10;
@@ -89,4 +90,5 @@ Drip Coffee      1           2016-07-16 07:14:14  62
 Drip Coffee      1           2016-08-06 12:37:28  64        
 Cappuccino, Unk  2           2016-09-09 09:26:46  63        
 Drip Coffee      2           2016-03-28 17:14:45  59        
-Drip Coffee      1           2016-04-24 14:01:38  65 ``` 
+Drip Coffee      1           2016-04-24 14:01:38  65 
+``` 

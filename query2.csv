@@ -1,21 +1,22 @@
-item_name,colder,warmer
-Americano,-0.416666666666667,0.5
-"Apple Juice",0.0,0.125
-"Au Lait, Unknown",1.0,0.166666666666667
-"Cappuccino, Unknown",0.0384615384615385,0.810810810810811
-"Cascara Fizz",1.0,0.75
-"Chemex Coffee",-0.2,0.923076923076923
-"Drip Coffee",1.03703703703704,-0.567567567567568
-Espresso,0.538461538461538,0.0625
-Gibraltar,0.125,0.181818181818182
-"Hot Chocolate",0.5,-0.1
-Latte,-0.428571428571429,-0.85
-Macchiato,0.285714285714286,0.0
-Mocha,0.294117647058824,-0.1875
-"NOLA Carton",0.666666666666667,1.0
-"New Orleans Iced Coffee (cup)",0.692307692307692,1.11111111111111
-"S.O. Iced - 4 oz Oji",0.75,0.888888888888889
-"S.O. Iced Coffee",0.0909090909090909,0.333333333333333
-"Sparkling Water",0.0,1.0
-"Still Water",0.0,0.0
-Tea,0.0,0.0
+item_name,"Avg change in sales when colder","Avg change in sales when warmer"
+Americano,0.0,0.09375
+"Apple Juice",0.0625,-0.03125
+"Au Lait, Unknown",0.03125,-0.3125
+"Cappuccino, Unknown",-0.9375,0.0
+"Cascara Fizz",-0.125,0.1875
+"Chemex Coffee",0.1875,-0.03125
+"Drip Coffee",0.625,-1.09375
+Espresso,-0.3125,0.03125
+Gibraltar,-0.125,-0.09375
+"Hot Chocolate",0.25,-0.09375
+Latte,1.03125,0.375
+Macchiato,0.09375,-0.1875
+Milk,-0.09375,0.03125
+Mocha,0.09375,0.5
+"NOLA Carton",-0.625,-0.46875
+"New Orleans Iced Coffee (cup)",-1.1875,-0.625
+"S.O. Iced - 4 oz Oji",-0.4375,0.09375
+"S.O. Iced Coffee",0.15625,0.0625
+"Sparkling Water",0.125,-0.15625
+"Still Water",0.03125,-0.125
+Tea,0.09375,0.125

@@ -33,7 +33,7 @@ An SQLite database was created and tables were defined, along with a number of v
 
 The normalized sales transaction data was inserted into two tables via pandas, in order to handle the nonstandard date format. The NOAA data was pared down to two columns and inserted into the table from a pandas dataframe after filling in nulls with adjacent values. The WU JSON data was read into a dictionary, then inserted into a table.
 
-I wrote a couple queries to fetch the solutions from the database. The queries themselves are pretty straightforward, as most of the work is done by the views ahead of time. SQLite will provide CSV data so piping the queries into files is very straightforward.
+I wrote a couple queries to fetch the solutions from the database. The queries themselves are not terribly complicated, as most of the work is done by the views ahead of time. SQLite will provide CSV data so piping the queries into files is very straightforward.
 
 ## Instructions
 

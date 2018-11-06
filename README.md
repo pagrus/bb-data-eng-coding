@@ -49,11 +49,15 @@ This solution requires python 3 and the pandas, numpy, sqlite3, json, and dateti
 
 ### How would productize both reports? Please consider the following in your answer: Data modeling, Data partioning, Data backfill
 
-I would first try to establish what incoming weather data would look like in a production setting, and maybe even recommend a more DIY type solution with an IOT device or SBC onsite rather than relying on a service to provide temp logs. I would probably also think about notifications for when it completes sucessfully, chokes on errors, or encounters weird data. I am coming back to RSS for this kind of thing and while that's not really a tool it could inform whatever actual tools are used.
+I would first try to establish what incoming weather data would look like in a production setting, and maybe even recommend a more DIY type solution with an IOT device or SBC onsite rather than relying on a service to provide temp logs. Whatever decisions are made here would suggest either backfilling wholesale or as needed, but honestly I think unless a lot of support data (eg more than time and temp) is needed I'd just as soon backfill everything into a working database and archive later. I would probably also think about notifications for when it completes sucessfully, chokes on errors, or encounters weird data. I am coming back to RSS for this kind of thing and while that's not really a tool it could inform whatever actual tools are used.
+
+Likewise partitioning would depend on the context in which a tool like this is rolled out-- if it were for a single store as a pilot it would make more sense to be hands-on with managing storage and resources, but if it had to go live in a day for 60 stores I would recommend being much more aggressive when deciding what data to cull or put on ice at the outset.
+
+Again depending on the rate of adoption I would attempt to anticipate modeling needs when scaling up, the most obvious first step would be adding fields and tables for different locations. Pricing data would be helpful to track promotions, margins, spoilage, manager performance and so forth but that is another thing altogether and may not be appropriate to include here. Assuming not all locations will be in sunny Oakland, I would want to think about precipitation data, maybe air quality for Los Angeles?
 
 ### What are some tradeoffs and assumptions for your design of this ETL?
 
-The big assumption I'm making is that these queries would be run once per day and could be cached somewhere for use in dashboards, reports, daily summaries and so forth. If they were more likely to be executed many times per hour (or minute, or second) then that would change my approach pretty dramatically. I also am assuming that the weather at the airport tracks the weather in Temescal pretty closely, or that whatever difference there is would be consistent. One tradeoff is the use of SQLite-- while it can be used for demonstration and proof of concept type stuff I am a little uncomfortable with its fast and loose data types. On a stylistic note I sacrifice some efficiency and speed for readability and simplicity, that I attempt to do this probably surprises no one. I am also assuming that the data provided is a good random sample and eg the negative values would be something I could expect in a production dataset. 
+The big assumption I'm making is that these queries would be run once per day and could be cached somewhere for use in dashboards, reports, daily summaries and so forth. If they were more likely to be executed many times per hour (or minute, or second) then that would change my approach pretty dramatically. I also am assuming that the weather at the airport tracks the weather in Temescal pretty closely, or that whatever difference there is would be consistent. One tradeoff is the use of SQLite-- while its portability makes it great for demonstration and proof of concept type stuff I am a little uncomfortable with its fast and loose data types. On a stylistic note I sacrifice some efficiency and speed for readability and simplicity, that I attempt to do this probably surprises no one. I am also assuming that the data provided is a good random sample and eg the negative values would be something I could expect in a production dataset. 
 
 ### What some of the tools you would consider to build this into an ETL pipeline?
 
@@ -110,21 +114,4 @@ id          stamp_a     temp_a      stamp_b     temp_b      diff
 193         2016-07-11  68          2016-07-12  67          -1        
 19          2016-01-19  56          2016-01-20  53          -3        
 354         2016-12-19  45          2016-12-20  48          3 
-```
-
-Every time there were consecutive dates which differed by (plus) three degrees, and the number of Espressos sold on those days *Oh, there's one (or more) of those negative values in the daily total.*
-```
-sqlite> SELECT stamp_a, stamp_b, temp_diff, item_name_a, daily_total_a, daily_total_b, item_total_diff
-   ...> FROM item_summary_diffs
-   ...> WHERE item_name_a = "Espresso" AND temp_diff = 3;
-stamp_a     stamp_b     temp_diff   item_name_a  daily_total_a  daily_total_b  item_total_diff
-----------  ----------  ----------  -----------  -------------  -------------  ---------------
-2016-02-05  2016-02-06  3           Espresso     -1             3              4              
-2016-02-06  2016-02-07  3           Espresso     3              4              1              
-2016-05-07  2016-05-08  3           Espresso     2              2              0              
-2016-06-22  2016-06-23  3           Espresso     1              4              3              
-2016-10-03  2016-10-04  3           Espresso     1              1              0              
-2016-12-12  2016-12-13  3           Espresso     2              3              1              
-2016-12-19  2016-12-20  3           Espresso     1              1              0              
-2016-12-28  2016-12-29  3           Espresso     2              1              -1 
 ```

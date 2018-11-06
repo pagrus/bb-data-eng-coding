@@ -82,31 +82,52 @@ FROM temps_breakout_daily ta
 JOIN temps_breakout_daily tb on ta.id = (tb.id - 1);
 """
 
-item_summary_diffs_view = """
-CREATE VIEW item_summary_diffs 
-AS SELECT id, stamp_a, stamp_b, diff AS temp_diff, 
-dsa.item_name AS item_name_a, dsa.daily_total AS daily_total_a, dsa.transaction_date AS transaction_date_a,  
-dsb.item_name AS item_name_b, dsb.daily_total AS daily_total_b, dsb.transaction_date AS transaction_date_b,
-(dsb.daily_total - dsa.daily_total) AS item_total_diff  
-FROM temp_deltas td 
-JOIN item_daily_summary dsa ON td.stamp_a = dsa.transaction_date
-JOIN item_daily_summary dsb ON td.stamp_b = dsb.transaction_date AND dsa.item_name = dsb.item_name;
+pos_a_totals_view = """
+CREATE VIEW pos_a_totals
+AS SELECT item_name, COUNT(transaction_date) AS pos_a_count, SUM(daily_total) AS pos_a_sum 
+FROM item_daily_summary 
+WHERE transaction_date in (
+  SELECT stamp_a
+  FROM temp_deltas
+  WHERE diff = 2
+)
+GROUP BY item_name;
 """
 
-item_change_pos_2f = """
-CREATE VIEW item_change_pos_2f
-AS SELECT item_name_a, AVG(item_total_diff) AS avg_diff
-FROM item_summary_diffs 
-WHERE temp_diff = 2  
-GROUP BY item_name_a;
+pos_b_totals_view = """
+CREATE VIEW pos_b_totals
+AS SELECT item_name, COUNT(transaction_date) AS pos_b_count, SUM(daily_total) AS pos_b_sum 
+FROM item_daily_summary 
+WHERE transaction_date in (
+  SELECT stamp_b
+  FROM temp_deltas
+  WHERE diff = 2
+)
+GROUP BY item_name;
 """
 
-item_change_neg_2f = """
-CREATE VIEW item_change_neg_2f
-AS SELECT item_name_a, AVG(item_total_diff) AS avg_diff 
-FROM item_summary_diffs 
-WHERE temp_diff = -2  
-GROUP BY item_name_a;
+neg_a_totals_view = """
+CREATE VIEW neg_a_totals
+AS SELECT item_name, COUNT(transaction_date) AS neg_a_count, SUM(daily_total) AS neg_a_sum 
+FROM item_daily_summary 
+WHERE transaction_date in (
+  SELECT stamp_a
+  FROM temp_deltas
+  WHERE diff = -2
+)
+GROUP BY item_name;
+"""
+
+neg_b_totals_view = """
+CREATE VIEW neg_b_totals
+AS SELECT item_name, COUNT(transaction_date) AS neg_b_count, SUM(daily_total) AS neg_b_sum 
+FROM item_daily_summary 
+WHERE transaction_date in (
+  SELECT stamp_b
+  FROM temp_deltas
+  WHERE diff = -2
+)
+GROUP BY item_name;
 """
 
 ##############################################################
@@ -130,9 +151,10 @@ cur.execute(temps_view_hourly)
 cur.execute(temps_view_daily)
 cur.execute(sales_with_temps_view)
 cur.execute(temp_deltas_view)
-cur.execute(item_summary_diffs_view)
-cur.execute(item_change_pos_2f)
-cur.execute(item_change_neg_2f)
+cur.execute(pos_a_totals_view)
+cur.execute(pos_b_totals_view)
+cur.execute(neg_a_totals_view)
+cur.execute(neg_b_totals_view)
 
 ##############################################################
 

@@ -25,7 +25,9 @@
 
 ## Approach
 
-I started with some EDA, during which I noticed some negative values in the quantity sold field. I took these to be representative of the data set they were taken from and while these didn't seem to match up with positive values (like they would in a canceled or void transaction) there weren't enough of them to cause concern. Since there were only 25 unique items it seemed to be better to split them off into their own table and de-duplicate/normalize the sales data prior to insertion in the database.
+I started with some EDA, during which I noticed some negative values in the quantity sold field. I took these to be representative of the data set they were taken from and while these didn't seem to match up with positive values (like they would in a canceled or void transaction) there weren't enough of them to cause concern despite being bunched up together. 
+
+Since there were only 25 unique items it seemed to be better to split them off into their own table and de-duplicate/normalize the sales data prior to insertion in the database.
 
 In looking for weather data I considered purchasing a data set or attempting to use a trial version but suitable options didn't present themselves. I found historical data from https://www.ncdc.noaa.gov/ which had hourly logs of temps but was taken from Oakland International Airport, some distance away. Weather Underground had JSON data (obtained by copying from the response payload from a JS request in a browser inspector) that was much closer but only had daily averages. I emailed the CS department at Oakland Technical High School, thinking that they might have temp records for use in student projects but I never heard back from them. I wound up using both the NOAA and WU sets, one for each query.
 
@@ -39,7 +41,7 @@ I wrote a couple queries to fetch the solutions from the database. The queries t
 
 This solution requires python 3 and the pandas, numpy, sqlite3, json, and datetime modules. It was written and tested on Ubuntu Mate Linux 18.04 and bash but I imagine pretty much any shell would work just as well.
 
-1. Copy the files or clone the GitHub repo 
+1. Copy the files or clone the repo 
 2. Copy or move morse.csv into the data directory
 3. Run `python3 bb_data_eng_challenge.py` to create and populate the database
 4. Run `sqlite3 sales.db < query1.sql > query1.csv` This one takes a minute to execute
